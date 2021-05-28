@@ -1,0 +1,38 @@
+<div class="card border-primary mb-3 animated fadeIn fast">
+  <div class="card-body text-primary">
+    <h5 class="card-title">Solicitudes</h5>
+    <div class="my-2 text-left">
+      <button class="btn btn-rounded btn-primary" type ="button" [routerLink]="['/listaManC/form']" >Solicitar servicio a empresa de camiones</button>
+      </div>
+
+          <div *ngIf="mantenimientosC?.length==0" class="alert alert-info">No hay envio de solicitudes registradas! </div>
+          <table class="table table-bordered table-stripped" *ngIf="mantenimientosC?.length>0">
+
+            <thead>
+              <tr>
+
+                <th> Id</th>
+                <th> Tipo</th>
+                <th> Prioridad</th>
+                <th> Empresa </th>
+                <th> Fecha asignada</th>
+                <th> Total  </th>
+                <th> Eliminar </th>
+                  <th>Detalles</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let man of mantenimientosC">
+                <td>{{man.id}}</td>
+                <td>{{man.tipo}}</td>
+                <td>{{man.prioridad}}</td>
+                <td> {{man.empresa}}</td>
+                <td>{{man.fechaAsignada  |  date:"EEEE dd, MMMM yyyy"}}</td>
+                <td>$ {{man.total}}</td>
+                <td><button type="button"  class="btn btn-success btn-sm"  [routerLink]="['/mantenimientosc',man.id]">Ver</button></td>
+                <td><button type="Eliminar" name="button"  (click)='delete(man)' class="btn btn-danger">Eliminar</button></td>
+
+
+              </tr>
+               </tbody>
+          </table>

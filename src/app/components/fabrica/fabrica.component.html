@@ -1,0 +1,16 @@
+<h1 class="animated fadeInd fast">Maquinas de la fabrica</h1>
+<hr>
+
+  <div class="card-columns">
+
+    <div class="card animated fadeIn fast" *ngFor="let fabrica of fabricas;let i=index">
+      <img [src]="fabrica.img" width="20" height="200" alt="" class="card-img-top" [alt]="fabrica.nombre">
+      <div class="card-body">
+        <h5 class="card-title"> {{fabrica.nombre}} </h5>
+        <p class="card-text">{{fabrica.descripcion}}</p>
+        <p class="card-text"><small class="text-muted">La fabrica cuenta con {{fabrica.cantidadDeMaquinas}} de estas maquinas.</small></p>
+      </div>
+    </div>
+
+
+  </div>

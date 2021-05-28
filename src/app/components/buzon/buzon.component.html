@@ -1,0 +1,33 @@
+<div class="card border-primary mb-3 animated fadeIn fast">
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de reportes</h5>
+
+    <div *ngIf="reportes?.length==0" class="alert alert-info">No hay reportes! </div>
+    <table class="table table-bordered table-stripped" *ngIf="reportes?.length>0">
+
+      <thead>
+        <tr>
+
+          <th> Reporte</th>
+          <th> Asunto</th>
+          <th> Prioridad</th>
+          <th> Fecha de reporte</th>
+          <th> Detalles</th>
+          <th> Eliminar</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let rep of reportes">
+          <td><img src="assets/img/mensaje.png" alt="" class="img-thumbnail rounded"
+              style="width:50px; cursor: pointer" ></td>
+          <td>{{rep.asunto}}</td>
+          <td>{{rep.prioridad}}</td>
+          <td>{{rep.fechaDeReporte |  date:"EEEE dd, MMMM yyyy"}}</td>
+
+          <td><button type="button"  class="btn btn-success btn-sm" [routerLink]="['/reportes',rep.id]" >Ver</button></td>
+          <td><button type="Eliminar" name="button" (click)='delete(rep)'  class="btn btn-danger">Eliminar</button></td>
+
+        </tr>
+         </tbody>
+    </table>

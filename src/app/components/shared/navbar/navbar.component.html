@@ -1,0 +1,80 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Ciasto Company</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item " routerLinkActive="active"  *ngIf="authService.hasRole('ROLE_ADMIN')">
+        <a class="nav-link" [routerLink]="['buzon']">
+          <img src="assets/img/mensaje.png" width="30" height="30" alt="">
+          Buzon de reportes</a>
+      </li>
+
+
+      <li class="nav-item dropdown"*ngIf="authService.hasRole('ROLE_ADMIN')"  >
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="assets/img/himage.png" width="30" height="30" alt="">Mantenimientos
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" [routerLink]="['listaMan']">Lista de mantenimientos</a>
+          <a class="dropdown-item" [routerLink]="['listaManC']" >Solicitud a empresas de reparación de camiones</a>
+        </div>
+
+
+      </li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="authService.hasRole('ROLE_ADMIN')">
+        <a class="nav-link" [routerLink]="['operarios']"> <img src="assets/img/operariosimage.png" width="30" height="30" alt="">
+          Operarios</a>
+      </li>
+      <li class="nav-item" routerLinkActive="active" *ngIf="authService.hasRole('ROLE_ADMIN')">
+        <a class="nav-link" [routerLink]="['insumos']">
+          <img src="assets/img/insumosimage.png" width="30" height="30" alt="">
+          Insumos</a>
+      </li>
+      <li class="nav-item " routerLinkActive="active" *ngIf="authService.hasRole('ROLE_ADMIN')">
+
+        <a class="nav-link" [routerLink]="['sucursal']">
+          <img src="assets/img/tortaimage.png" width="30" height="30" alt="">
+          Sucursales</a>
+      </li>
+      <li class="nav-item " routerLinkActive="active" *ngIf="authService.isAuthenticated()">
+        <a class="nav-link" [routerLink]="['fabrica']"><img src="assets/img/fabricaimage.png" width="30" height="30" alt="">
+          Planta de fabricacion</a>
+      </li>
+      <li class="nav-item dropdown">
+
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Historial de mantenimientos</a>
+          <a class="dropdown-item" href="#">Historial de trabajo de los operarios</a>
+        </div>
+      </li>
+
+      <li class="nav-item " routerLinkActive="active"  *ngIf="authService.hasRole('ROLE_USER')">
+
+        <a class="nav-link" [routerLink]="['realizar']"  >
+          <img src="assets/img/reporte1.png" width="30" height="30" alt="">
+          Realizar reporte</a>
+      </li>
+
+
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <li *ngIf="!authService.isAuthenticated()"><a [routerLink]="['login']" class="btn btn-outline-primary">
+          Ingresar</a></li>
+
+      <li *ngIf="authService.isAuthenticated()" class="dropdown">
+        <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{authService.operario.username}}
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <button (click)="logout()" class="dropdown-item" type="submit">Salir</button>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</nav>

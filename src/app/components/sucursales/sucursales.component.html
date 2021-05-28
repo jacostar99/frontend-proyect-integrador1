@@ -1,0 +1,17 @@
+<h1 class="animated fadeInd fast">Sucursales</h1>
+<hr>
+<div class="row">
+
+  <div class="card-columns">
+
+    <div class="card animated fadeIn fast" *ngFor="let sucursal of sucursales;let i=index">
+      <img [src]="sucursal.img" width="20" height="200" alt="" class="card-img-top" [alt]="sucursal.nombre">
+      <div class="card-body">
+        <h5 class="card-title"> {{sucursal.nombre}} </h5>
+        <p class="card-text">{{sucursal.ciudad}}</p>
+        <p class="card-text"><small class="text-muted">{{sucursal.direccion}}</small></p>
+      </div>
+    </div>
+
+
+  </div>

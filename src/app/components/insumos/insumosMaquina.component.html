@@ -1,0 +1,14 @@
+<div class="card-columns">
+
+  <div class="card animated fadeIn fast" *ngFor="let insumoM of insumosM;let i=index">
+    <img [src]="insumoM.img" width="20" height="200" alt="" class="card-img-top" [alt]="insumoM.nombre">
+    <div class="card-body">
+      <h5 class="card-title"> {{insumoM.nombre}} </h5>
+      <p class="card-text">{{insumoM.descripcion | slice:0:70}}...</p>
+      <p class="card-text"><small class="text-muted">{{insumoM.precio}}</small></p>
+      <button (click)="verInsumoM(i)" type="button" class="btn btn-outline-primary btn block"> Ver mas...</button>
+    </div>
+  </div>
+
+
+</div>

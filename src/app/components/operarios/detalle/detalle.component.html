@@ -1,0 +1,83 @@
+<div class="abrir-modal animacion fadeIn" *ngIf="modalService.modal">
+<div  class="modal" tabindex="-1" role="dialog" style="display:block;">
+  <div class="modal-dialog modal-lg"  role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ titulo }}</h5>
+        <button (click)="cerrarModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+
+              <ul *ngIf="operario" class="list-group text-dark mb-3">
+                <li class="list-group-item active">Nombre: {{operario.nombre}} </li>
+                <li class="list-group-item">Apellidos: {{operario.apellido}}  </li>
+                <li class="list-group-item">Fecha de creacion: {{operario.fechaCreacion}}  </li>
+                <li class="list-group-item">Ciudad: {{operario.region.nombre}}  </li>
+                <li class="list-group-item">Hora inicio turno: {{operario.estado}}  </li>
+                <li class="list-group-item">Hora fin turno: {{operario.horaFinTurno}}  </li>
+
+
+              </ul>
+
+              <div class="input-group">
+                <div class="custom-file">
+                  <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                  <label class="custom-file-label" for="inputGroupFile04">Seleccionar foto</label>
+                </div>
+                <div class="input-group-append">
+                  <button (click)="subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Subir</button>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm">
+            <img *ngIf="operario?.foto" src="http://localhost:8080/api/uploads/img/{{operario.foto}}" alt="" class="img-thumbnail rounded">
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+        <div class="row">
+
+          <div class="alert alert-info my-4" *ngIf="operario.mantenimientos.length==0">
+            No hay mantenimientos asignados para el operario {{operario.nombre}} {{operario.apellido}}
+          </div>
+
+          <table class="table table-bordered table-striped my-4"  *ngIf="operario.mantenimientos.length>0">
+            <thead>
+              <tr>
+                <th>Id mantenimiento</th>
+                <th>Prioridad</th>
+                <th>Fecha asignada</th>
+                <th>Total</th>
+                <th>Detalle</th>
+                <th>Eliminar</th>
+              </tr>
+
+            </thead>
+            <tbody>
+              <tr *ngFor="let mantenimiento of operario.mantenimientos">
+              <td>{{mantenimiento.id}}</td>
+              <td>{{mantenimiento.prioridad}}</td>
+              <td>{{mantenimiento.fechaAsignada |  date:"EEEE dd, MMMM yyyy"}}</td>
+              <td>$ {{mantenimiento.total}}</td>
+              <td><button class="btn btn-primary btn-sm" type="button" [routerLink]="['/mantenimientos',mantenimiento.id]">Ver</button></td>
+              <td><button class="btn btn-danger btn-sm" type="button" (click)="delete(mantenimiento)">Eliminar</button></td>
+             </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button (click)="cerrarModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

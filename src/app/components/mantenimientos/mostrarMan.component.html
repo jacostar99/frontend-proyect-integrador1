@@ -1,0 +1,33 @@
+<div class="card border-primary mb-3 animated fadeIn fast">
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de mantenimientos</h5>
+  
+
+
+    <div *ngIf="mantenimientos?.length==0" class="alert alert-info">No hay mantenimientos registrados! </div>
+    <table class="table table-bordered table-stripped" *ngIf="mantenimientos?.length>0">
+
+      <thead>
+        <tr>
+
+          <th> Id</th>
+          <th> Tipo</th>
+          <th> Prioridad</th>
+          <th> Fecha asignada</th>
+          <th> Total</th>
+            <th>Detalles</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let man of mantenimientos">
+          <td>{{man.id}}</td>
+          <td>{{man.tipo}}</td>
+          <td>{{man.prioridad}}</td>
+          <td>{{man.fechaAsignada  |  date:"EEEE dd, MMMM yyyy"}}</td>
+          <td>$ {{man.total}}</td>
+          <td><button type="button"  class="btn btn-success btn-sm"  [routerLink]="['/mantenimientos',man.id]">Ver</button></td>
+
+
+        </tr>
+         </tbody>
+    </table>

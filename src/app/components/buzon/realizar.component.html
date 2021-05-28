@@ -1,0 +1,81 @@
+<div class="card bg-dark text-white">
+  <div class="card-header">Realizar reporte</div>
+  <div class="card-body">
+
+    <form >
+      <div class="form-group row">
+        <label for="asunto" class="col-form-label col-sm-2">Asunto:</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="reporte.asunto" name="asunto"> <!--required minlength="4"-->
+
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="descripcion" class="col-form-label col-sm-2">Descripcion:</label>
+        <div class="col-sm-6">
+          <textarea name="descripcion" [(ngModel)]="reporte.descripcion" class="form-control"> </textarea>
+
+        </div>
+      </div>
+      <hr>
+      <div class="form-group row">
+        <label for="prioridad" class="col-sm-2 col-form-label">Elija la prioridad que cree indicada para este reporte:</label>
+
+        <div class="col-sm-6">
+          <h5>Normal: Tiempo en que usted cree que se deberia asignar mantenimiento: 2-3 dias</h5>
+          <h5>Urgente: Tiempo en que usted cree que se deberia asignar mantenimiento: 24 horas</h5>
+          <h5>Emergencia Tiempo en que  usted cree que se deberia asignar mantenimiento: 5-7 horas</h5>
+          <select  class="form-control" [(ngModel)]="reporte.prioridad" name="prioridad" style="width:500px;">
+            <option [(ngModel)]="reporte.prioridad"></option>
+            <option [(ngModel)]="reporte.prioridad">Normal </option>
+            <option [(ngModel)]="reporte.prioridad">Urgente </option>
+            <option [(ngModel)]="reporte.prioridad">Emergencia </option>
+
+            </select>
+
+        </div>
+
+      </div>
+
+
+      <hr>
+
+      <div class="form-group row">
+        <label for="ciudad" class="col-sm-2 col-form-label">Ciudad:</label>
+        <div class="col-sm-6">
+          <select  class="form-control" [(ngModel)]="reporte.ciudad" name="ciudad" style="width:500px;">
+            <option [(ngModel)]="reporte.ciudad"></option>
+            <option [(ngModel)]="reporte.ciudad">Cali</option>
+            <option [(ngModel)]="reporte.ciudad">Medellin</option>
+            <option [(ngModel)]="reporte.ciudad">Bogota</option>
+            <option [(ngModel)]="reporte.ciudad">Cartagena</option>
+
+            </select>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="sucursal" class="col-sm-2 col-form-label">Sucursal:</label>
+        <div class="col-sm-6">
+          <select  class="form-control" [(ngModel)]="reporte.sucursal" name="sucursal" style="width:500px;">
+            <option [(ngModel)]="reporte.sucursal"></option>
+            <option [(ngModel)]="reporte.sucursal">Ciasto company Unicentro</option>
+            <option [(ngModel)]="reporte.sucursal">Ciasto company Chipichape</option>
+            <option [(ngModel)]="reporte.sucursal">Ciasto company Salitre</option>
+            <option [(ngModel)]="reporte.sucursal">Ciasto company Santafe</option>
+            <option [(ngModel)]="reporte.sucursal">Ciasto company San Diego</option>
+            <option [(ngModel)]="reporte.sucursal">Ciasto company Bosque Plaza</option>
+            <option [(ngModel)]="reporte.sucursal">Ciasto company El castillo</option>
+            <option [(ngModel)]="reporte.sucursal">Ciasto company La castellana</option>
+
+
+            </select>
+        </div>
+      </div>
+      <td><button type="button" (click)='create()'  class="btn btn-success btn-sm">Enviar reporte</button></td>
+
+    </form>
+
+    </div>
+    </div>

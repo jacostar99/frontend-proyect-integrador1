@@ -1,0 +1,22 @@
+<h1 class="animated fadeIn">{{insumo.nombre}} <h3> {{insumo.precio}}</h3> </h1>
+<hr>
+
+<div class="row">
+  <div class=col-md-4>
+    <img [src]="insumo.img" class="img-fluid" [alt]="insumo.nombre">
+    <br> <br>
+    <a [routerLink]="['/insumos/']" class="btn btn-outline-danger btn block">Regresar</a>
+
+
+  </div>
+  <div class=col-md-8>
+    <h3> {{insumo.nombre}}</h3>
+    <hr>
+    <p>
+      {{insumo.descripcion}}
+    </p>
+  </div>
+
+
+
+</div>

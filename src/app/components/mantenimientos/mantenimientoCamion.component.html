@@ -1,0 +1,121 @@
+<div class="card bg-light">
+  <div class="card-header"> {{titulo}}: {{mantenimientoC.descripcion}}</div>
+  <div class="card-body">
+
+     <form #mantenimientoCForm="ngForm">
+    <div class="form-group row">
+      <label for="tipo" class="col-sm-2 col-form-label">Empresa a solicitar:</label>
+      <div class="col-sm-6">
+        <select class="form-control" [(ngModel)]="mantenimientoC.empresa" name="empresa" style="width:500px;">
+          <option [(ngModel)]="mantenimientoC.empresa">Empresa de mantenimiento a camiones WheelTruck S.A.S</option>
+          <option [(ngModel)]="mantenimientoC.empresa">Empresa de limpieza a camiones ShowerTruck S.A.S</option>
+          <option [(ngModel)]="mantenimientoC.empresa">Empresa de servicio a camiones ServiceTruck S.A.S</option>
+        </select>
+      </div>
+    </div>
+
+      <div class="form-group row">
+        <label for="tipo" class="col-sm-2 col-form-label">Tipo</label>
+        <div class="col-sm-6">
+          <select class="form-control" [(ngModel)]="mantenimientoC.tipo" name="tipo" style="width:500px;">
+            <option [(ngModel)]="mantenimientoC.tipo">Preventivo</option>
+            <option [(ngModel)]="mantenimientoC.tipo">Correctivo</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="form-group row">
+        <label for="descripcion" class="col-sm-2 col-form-label">Descripcion:</label>
+        <div class="col-sm-6">
+          <textarea name="descripcion" [(ngModel)]="mantenimientoC.descripcion" class="form-control"> </textarea>
+        </div>
+      </div>
+
+
+
+      <div class="form-group row">
+        <label for="fechaAsignada" class="col-sm-2 col-form-label">Fecha de mantenimiento:</label>
+        <div class="col-sm-6">
+          <input [matDatepicker]="myDatepicker" name="fechaAsignada" [(ngModel)]="mantenimientoC.fechaAsignada" class="form-control" style="display:inline; width:300px">
+          <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #myDatepicker></mat-datepicker>
+        </div>
+      </div>
+
+
+
+      <div class="form-group row">
+        <label for="direccion" class="col-sm-2 col-form-label">Direccion:</label>
+        <div class="col-sm-6">
+          <input type="text" name="direccion" [(ngModel)]="mantenimientoC.direccion" class="form-control" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="horaInicio" class="col-sm-2 col-form-label">Hora inicio:</label>
+        <div class="col-sm-6">
+
+          <input type="time" name="horaInicio"  [(ngModel)]="mantenimientoC.horaInicio" value="00:00:00" max="22:30:00" min="10:00:00" step="1">
+
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="horaAproximadaDuracion" class="col-sm-2 col-form-label">Duracion aproximada:</label>
+  <div class="col-sm-6">
+    <input type="text" name="horaAproximadaDuracion" [(ngModel)]="mantenimientoC.horaAproximadaDuracion" class="form-control" />
+  </div>
+</div>
+
+<div class="form-group row">
+  <label for="prioridad" class="col-sm-2 col-form-label">Prioridad:</label>
+  <div class="col-sm-6">
+    <input type="text" name="prioridad" [(ngModel)]="mantenimientoC.prioridad" class="form-control" />
+  </div>
+</div>
+
+<div class="for-group row">
+  <div class="col-sm-6">
+    <mat-form-field>
+      <input type="text" placeholder="Añadir insumo" aria-label="Insumos" matInput [formControl]="autocompleteControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="mostrarNombre" (optionSelected)="seleccionarInsumo($event)">
+        <mat-option *ngFor="let insumo of insumosFiltrados | async" [value]="insumo">
+          {{insumo.nombre}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+</div>
+<div class="alert alert-info my-4" *ngIf="mantenimientoC.items.length==0">
+  No hay insumos agregados para la solicitud.Debe agregar por lo menos uno!
+</div>
+
+<table class="table table-striped table-hover table-sm">
+  <thead>
+    <th>Nombre</th>
+    <th>Precio</th>
+    <th>Cantidad</th>
+    <th>Total</th>
+    <th>Eliminar</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of mantenimientoC.items">
+      <td> {{item.insumo.nombre}}</td>
+      <td> $ {{item.insumo.precio}}</td>
+      <td><input type="number" value="{{item.cantidad}}" class="form-control col-sm-4" (change)="actualizarCantidad(item.insumo.id,$event)"></td>
+      <td> $ {{item.calcularImporte()}}</td>
+      <td><button class="btn btn-danger btn-sm" type="button" (click)="eliminarItemFactura(item.insumo.id)">x</button></td>
+    </tr>
+  </tbody>
+</table>
+<h3 class="float-right">Gran Total: <span class="badge badge-secondary">$ {{mantenimientoC.calcularTotal()}}</span> </h3>
+
+<div class="form-group row">
+  <div class="col-sm-6">
+    <input type="submit" (click)="create()" value="Enviar solicitud" class="btn btn-secondary" [disabled]="mantenimientoCForm.form.invalid || mantenimientoC.items.length==0" />
+  </div>
+</div>
+</form>
+</div>
+</div>

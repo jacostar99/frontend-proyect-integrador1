@@ -1,0 +1,47 @@
+<detalle-operario *ngIf="operarioSeleccionado" [operario]="operarioSeleccionado"></detalle-operario>
+<div class="card border-primary mb-3 animated fadeIn fast">
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de operarios</h5>
+
+  <div class="my-2 text-left">
+    <button class="btn btn-rounded btn-primary" type ="button" [routerLink]="['/operarios/formulario']">Crear operario</button>
+    </div>
+    <div *ngIf="listaDeOperario?.length==0" class="alert alert-info">No hay operarios registrados! </div>
+
+    <table class="table table-bordered table-stripped" *ngIf="listaDeOperario?.length>0">
+      <thead>
+        <tr>
+          <th> Perfil</th>
+          <th> Nombre</th>
+          <th> Apellido</th>
+          <th> Hora inicio turno</th>
+          <th> Hora Fin turno</th>
+          <th> Fecha Creacion</th>
+            <th> Asignar mantenimiento</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let operario of listaDeOperario">
+          <td><img (click)="abrirModal(operario)" *ngIf="operario?.foto" src="http://localhost:8080/api/uploads/img/{{operario.foto}}" alt="" class="img-thumbnail rounded"
+            style="width:64px; cursor: pointer">
+            <img (click)="abrirModal(operario)" *ngIf="!operario?.foto" src="http://localhost:8080/images/no-usuario.png" alt="Sin foto" class="img-thumbnail rounded"
+              style="width:64px; cursor: pointer">
+            </td>
+          <td>{{operario.nombre}}</td>
+          <td>{{operario.apellido}}</td>
+          <td>{{operario.estado}}</td>
+          <td>{{operario.horaFinTurno}}</td>
+          <td>{{operario.fechaCreacion}}</td>
+          <td><button type="button" [routerLink]="['/mantenimientos/form',operario.id]" class="btn btn-success btn-sm">Asignar mantenimiento</button></td>
+            <td><button type="Editar" name="button"[routerLink]="['/operarios/formulario',operario.id]" class="btn btn-primary">Editar</button></td>
+          <td><button type="Eliminar" name="button" (click)='delete(operario)' class="btn btn-danger">Eliminar</button></td>
+        </tr>
+         </tbody>
+    </table>
+    <paginator-nav *ngIf="paginador" [paginador]="paginador"> <!--inyeccion de dependencias entre un componente padre y un componente hijo-->
+
+    </paginator-nav>
+  </div>
+</div>
